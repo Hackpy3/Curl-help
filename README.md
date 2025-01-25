@@ -177,95 +177,120 @@ curl -H "Header1: Value1" -H "Header2: Value2" https://api.example.com/resource
 ```
 
 ---
-
-### **Here are examples of how to use `curl` with the **POST**, **GET**, and **HEAD** HTTP methods:
+### Here are detailed examples of how to use the `curl` command with all HTTP methods: **GET**, **POST**, **HEAD**, **PUT**, **DELETE**, **OPTIONS**, and **PATCH**.
 
 ---
 
-### 1. **GET Method**
-The `GET` method is the default when you use `curl` without specifying a method. It retrieves data from a server.
+### 1. **GET Method**  
+**Purpose:** Retrieve data from a server.
 
-**Example:**
+**Example:**  
 ```bash
 curl -X GET "https://api.example.com/data?param=value"
 ```
 
-- **Explanation:**
-  - `-X GET`: Explicitly specifies the `GET` method (not required as `GET` is the default).
-  - The URL includes query parameters `?param=value`.
-
-**Example with Output Saved to a File:**
+- Retrieves data using query parameters.  
+- Saves the response to a file:  
 ```bash
-curl -X GET "https://api.example.com/data?param=value" -o output.json
+curl -X GET "https://api.example.com/data?param=value" -o response.json
 ```
 
 ---
 
-### 2. **POST Method**
-The `POST` method is used to send data to the server.
+### 2. **POST Method**  
+**Purpose:** Send data to a server (e.g., create a resource).
 
-**Example:**
+**Example with Form Data:**  
 ```bash
 curl -X POST "https://api.example.com/register" -d "name=John&email=john@example.com"
 ```
 
-- **Explanation:**
-  - `-X POST`: Specifies the `POST` method.
-  - `-d "name=John&email=john@example.com"`: Sends form data in the request body.
-
-**Example with JSON Data:**
+**Example with JSON Data:**  
 ```bash
 curl -X POST "https://api.example.com/register" -H "Content-Type: application/json" -d '{"name":"John","email":"john@example.com"}'
 ```
 
-- **Explanation:**
-  - `-H "Content-Type: application/json"`: Specifies that the data is in JSON format.
-  - `-d '{"name":"John","email":"john@example.com"}'`: Sends JSON data in the request body.
+- Add headers for authorization:  
+```bash
+curl -X POST "https://api.example.com/register" -H "Authorization: Bearer YOUR_ACCESS_TOKEN" -d '{"name":"John","email":"john@example.com"}'
+```
 
 ---
 
-### 3. **HEAD Method**
-The `HEAD` method retrieves only the headers of a response, without the body.
+### 3. **HEAD Method**  
+**Purpose:** Retrieve response headers only (no body).
 
-**Example:**
+**Example:**  
 ```bash
 curl -I "https://api.example.com/resource"
 ```
 
-- **Explanation:**
-  - `-I`: Shortcut for `--head`, performs a `HEAD` request.
-  - Only the response headers are returned.
+---
 
-**Example to Check If a File Exists:**
+### 4. **PUT Method**  
+**Purpose:** Update a resource on the server.
+
+**Example with JSON Data:**  
 ```bash
-curl -I "https://api.example.com/file.txt"
+curl -X PUT "https://api.example.com/resource/123" -H "Content-Type: application/json" -d '{"name":"John Updated"}'
 ```
 
 ---
 
-### Adding Authentication or Custom Headers
-You can include authentication tokens or custom headers with any request.
+### 5. **DELETE Method**  
+**Purpose:** Delete a resource from the server.
 
-**Example with Custom Header:**
+**Example:**  
 ```bash
-curl -X GET "https://api.example.com/data" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+curl -X DELETE "https://api.example.com/resource/123"
 ```
 
-**Example with Basic Authentication:**
+**Example with Authorization Header:**  
 ```bash
-curl -u username:password -X GET "https://api.example.com/secure-data"
+curl -X DELETE "https://api.example.com/resource/123" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 ---
 
-### Summary of Options:
-| Option               | Purpose                                  |
-|----------------------|------------------------------------------|
-| `-X METHOD`          | Specify the HTTP method (e.g., `GET`, `POST`). |
-| `-d`                 | Send data in the request body (e.g., for `POST`). |
-| `-H`                 | Add custom headers (e.g., `Content-Type`). |
-| `-I` or `--head`     | Perform a `HEAD` request.               |
-| `-o filename`        | Save the response body to a file.        |
-| `-u username:password`| Use Basic Authentication.               |
+### 6. **OPTIONS Method**  
+**Purpose:** Retrieve information about the communication options available for a resource.
 
-Let me know if you need further assistance!
+**Example:**  
+```bash
+curl -X OPTIONS "https://api.example.com/resource"
+```
+
+---
+
+### 7. **PATCH Method**  
+**Purpose:** Partially update a resource on the server.
+
+**Example with JSON Data:**  
+```bash
+curl -X PATCH "https://api.example.com/resource/123" -H "Content-Type: application/json" -d '{"email":"updatedemail@example.com"}'
+```
+
+---
+
+### Additional Features with `curl`:
+1. **Verbose Mode**:  
+   ```bash
+   curl -v -X GET "https://api.example.com/data"
+   ```
+
+2. **Save Response to a File**:  
+   ```bash
+   curl -X GET "https://api.example.com/data" -o response.json
+   ```
+
+3. **Send Authentication**:  
+   ```bash
+   curl -u username:password -X GET "https://api.example.com/secure-data"
+   ```
+
+4. **Custom Headers**:  
+   ```bash
+   curl -X GET "https://api.example.com/data" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+   ```
+
+Let me know if you'd like further clarification or examples!
